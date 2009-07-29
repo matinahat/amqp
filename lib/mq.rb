@@ -167,7 +167,7 @@ class MQ
     when Frame::Body
       @body << frame.payload
       if @body.length >= @header.size
-        @header.properties.update(@method.arguments)
+        @header.properties.update(@method.arguments) if @method
         @consumer.receive @header, @body if @consumer
         @body = @header = @consumer = @method = nil
       end
